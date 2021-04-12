@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+$body-background-color: hsl(0, 0%, 97%);
+@import "bulma";
+
+.notification:not(:last-child){
+  margin-bottom: 0;
+}
+.button.is-info.is-inverted:hover, .button.is-info.is-inverted.is-hovered {
+  background-color: hsl(204, 100%, 20%);
+  color: white;
+}
+a.has-text-white:hover, a.has-text-white:focus {
+  color: hsl(204, 100%, 20%) !important;
+}
+#form-div{
+  border-radius: $radius;
+  box-shadow: 2px 2px 4px #003d66;
+  .label{
+    text-shadow: 2px 2px 4px black;
+  }
+}
+#form-title{
+  box-shadow: 2px 2px 4px #003d66;
+  text-shadow: 2px 2px 4px black;
+  border-radius: 10px;
+}
+

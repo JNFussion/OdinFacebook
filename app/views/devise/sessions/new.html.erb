@@ -1,26 +1,43 @@
-<h2>Log in</h2>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div id="form-div" class="column is-one-third has-background-info">
+        <h2 id="form-title" class="title has-text-white has-background-info-dark p-2">Log in</h2>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field">
+            <%= f.label :email , class: "label has-text-white"%>
+            <div class="control">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
+            </div>
+          </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+          <div class="field">
+            <%= f.label :password , class: "label has-text-white"%>
+            <div class="control">
+              <%= f.password_field :password, autocomplete: "current-password", class: "input" %>
+            </div>
+          </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me, class: "checkbox has-text-white"%> 
+            </div>
+          <% end %>
+          <div class="field has-text-white">
+            <%= render "devise/shared/links" %>
+          </div>
+          
+          
+          <div class="buttons is-right is-info is-inverted">
+            <%= f.submit "Log in", class: "button is-info is-inverted" %>
+            <%= link_to 'Back', :back , class: "button is-info is-inverted"%>
+          </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</section>
 
-<%= render "devise/shared/links" %>
+
