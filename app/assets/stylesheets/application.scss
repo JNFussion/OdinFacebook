@@ -39,4 +39,21 @@ a.has-text-white:hover, a.has-text-white:focus {
   text-shadow: 2px 2px 4px black;
   border-radius: 10px;
 }
+#user_resume{
+  border-radius: 1000px;
+}
+.stats{
+  .title{
+    font-size: 1.25em;
+  }
+  .heading{
+    font-size: 0.70em;
+  }
+}
+.image {
+  border-radius: 50%;
+  img {
+    border-radius: 50%;
+  }
+}
 
