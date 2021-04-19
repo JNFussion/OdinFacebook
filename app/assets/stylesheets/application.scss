@@ -42,6 +42,13 @@ a.has-text-white:hover, a.has-text-white:focus {
 #user_resume{
   border-radius: 1000px;
 }
+#notification_user{
+  padding: 0;
+  
+  a{
+    text-decoration: none;
+  }
+}
 .stats{
   .title{
     font-size: 1.25em;

@@ -7,7 +7,7 @@ class FriendRequestsController < ApplicationController
       flash[:notice] = "Friend request has been sent."
       redirect_back(fallback_location: root_path)
     else
-      flash[:alert] = "Friend request cannot be sent."
+      flash[:alert] = @friend_request.errors.where(:base).first.full_message
       redirect_back(fallback_location: root_path)
     end
   end
@@ -19,7 +19,7 @@ class FriendRequestsController < ApplicationController
       flash[:notice] = "Friend request accepted."
       redirect_back(fallback_location: root_path)
     else
-      flash[:notice] = "Friend request cannot be accepted."
+      flash[:alert] = "Friend request cannot be accepted."
       redirect_back(fallback_location: root_path)
     end
   end
@@ -27,6 +27,7 @@ class FriendRequestsController < ApplicationController
   def destroy
     @friend_request = FriendRequest.find(params[:id])
     @friend_request.destroy
+    redirect_back(fallback_location: root_path)
   end
 
   private

@@ -12,11 +12,37 @@
     POST
   </div>
   
-  <div class="column is-3 has-background-danger">
-    <% current_user.friend_requests_as_receiver.each do |request|%>
-      <%= request.requestor.full_name %>
-      <%= link_to "Accept", friend_request_path(request), method: :put %>
-      <%= link_to "Decline", friend_request_path(request), method: :destroy,  data: { confirm: "Are you sure?" } %>
-    <% end %>
+  <div class="column is-3">
+    <article id="notification_user" class="message is-info box mt-6 mx-3">
+      <div class="message-header">
+        <p>Notifications:</p>
+      </div>
+      <div class="message-body">
+        <% current_user.friend_requests_as_receiver.each do |request|%>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-32x32">
+              <img src="https://bulma.io/images/placeholders/128x128.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <%= link_to request.requestor.full_name, user_path(request.requestor)%>
+            </div>
+          </div>
+          <div class="media-right">
+            <div class="buttons are-small">
+              <%= link_to "Accept", friend_request_path(request), method: :put, class: "button is-success" %>
+              <%= link_to "Decline", friend_request_path(request), method: :delete,  data: { confirm: "Are you sure?" }, class: "button is-danger" %>
+            </div>
+          </div>
+        </article>
+         <% end %>
+      </div>
+    </article>
   </div>
 </div>
+
+         
+         
+        
