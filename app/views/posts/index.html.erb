@@ -13,6 +13,10 @@
   </div>
   
   <div class="column is-3 has-background-danger">
-    NOTIFICATIONS
+    <% current_user.friend_requests_as_receiver.each do |request|%>
+      <%= request.requestor.full_name %>
+      <%= link_to "Accept", friend_request_path(request), method: :put %>
+      <%= link_to "Decline", friend_request_path(request), method: :destroy,  data: { confirm: "Are you sure?" } %>
+    <% end %>
   </div>
 </div>
