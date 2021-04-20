@@ -4,6 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
+  validates :password, confirmation: true
+  validates :email, :username, :password, :password_confirmation, :first_name, :last_name, :birth_date, :nationality, presence: true
+  validates :email, :username, uniqueness: true
+  validates :first_name, :last_name, format: {with: /\A[a-zA-Z]+\z/,  message: "only allows letters"}
+  validates_date :birth_date, between: [Date.today - 14.years, Date.today - 100.years]
+  
+
+
   # User-Friend Request association
   has_many :friend_requests_as_requestor, class_name: :FriendRequest, foreign_key: :requestor_id
   has_many :receivers, through: :friend_requests_as_requestor
