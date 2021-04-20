@@ -33,6 +33,7 @@ gem 'bulma-rails', '~> 0.9.1'
 gem 'faker'
 gem 'country_select', '~> 4.0'
 gem 'rails-i18n'
+gem 'countries'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

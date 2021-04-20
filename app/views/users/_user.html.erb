@@ -1,10 +1,30 @@
-<div class="mb-3">
-  <h2 class="title is-5 mb-0"><%=user.username%></h2>
-  <div>ID: <%= user.id %></div>
-  <div>Name: <%= user.first_name%></div>
-  <div>Last name: <%= user.last_name%></div>
-  <div>Email: <%= user.email %></div>
-  <%= button_to "friend request", friend_requests_path(friend_request: {:receiver_id => user.id})%>
-  <%= link_to "delete friend", friendship_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "button is-danger" %>
-</div>
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="https://bulma.io/images/placeholders/128x128.png">
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong><%= link_to user.full_name, user_path(user)%></strong> <small><%=user.username%></small>
+        <br>
+        <%= user.nationality_name %>
+      </p>
+    </div>
+  </div>
+  <div class="media-right">
+    <% unless current_user.friends.include?(user) %>
+      <% request = user.friend_requests_as_requestor.find {|r| r.receiver_id == current_user.id}%>
+      <% if request %>
+        <%= link_to "Accept", friend_request_path(request), method: :put, class: "button is-success" %>
+      <% else %>
+        <%= link_to "Send request", friend_requests_path(friend_request: {:receiver_id => user.id}),method: :post, class: "button is-success" %>
+      <% end %>
+    <% else %>
+      <%= link_to "Delete friend", friendship_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "button is-danger" %>
+    <% end %>
+  </div>
+</article>
+
 

@@ -260,6 +260,7 @@ DEPENDENCIES
   bulma-rails (~> 0.9.1)
   byebug
   capybara (>= 3.26)
+  countries
   country_select (~> 4.0)
   devise
   faker

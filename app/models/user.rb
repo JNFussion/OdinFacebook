@@ -18,4 +18,9 @@ class User < ApplicationRecord
   def full_name
     first_name + " " + last_name
   end
+
+  def nationality_name
+    ISO3166::Country.find_country_by_alpha2(nationality).name
+  end
+
 end
