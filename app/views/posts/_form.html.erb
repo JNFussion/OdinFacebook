@@ -1,0 +1,13 @@
+<%= form_with model: @post do |f| %>
+  <div class="field">
+    <%= f.label :content, "What are you thinking about?", class: "label"%>
+    <div class="control">
+      <%= f.text_area :content, class:"textarea is-info is-small", autofocus: true, placeholder: "Post about..."%>
+    </div>
+  </div>
+  <div class="field is-grouped is-grouped-right">
+    <div class="control">
+      <%= f.submit "Publish", class: "button is-info"%>
+    </div>
+  </div>
+<% end %>

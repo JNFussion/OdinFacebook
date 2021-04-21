@@ -15,13 +15,13 @@
         <div class="level-item has-text-centered">
           <div class="stats">
             <p class="heading">Posts</p>
-            <p class="title">3,456</p>
+            <p class="title"><%= current_user.posts.count%></p>
           </div>
         </div>
         <div class="level-item has-text-centered">
           <div class="stats">
             <p class="heading">Friends</p>
-            <p class="title">123</p>
+            <p class="title"><%= current_user.friends.count%></p>
           </div>
         </div>
       </nav>

@@ -19,7 +19,11 @@
       <% if request %>
         <%= link_to "Accept", friend_request_path(request), method: :put, class: "button is-success" %>
       <% else %>
-        <%= link_to "Send request", friend_requests_path(friend_request: {:receiver_id => user.id}),method: :post, class: "button is-success" %>
+        <% if current_user.receivers.include?(user)%>
+          <%= button_tag "Pending request", class:"button is-info", disabled: true%>
+        <% else %>
+          <%= link_to "Send request", friend_requests_path(friend_request: {:receiver_id => user.id}),method: :post, class: "button is-success" %>
+        <% end %>
       <% end %>
     <% else %>
       <%= link_to "Delete friend", friendship_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "button is-danger" %>
