@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @posts = Post.where(author: current_user.friends).order(created_at: :desc)
+    @posts = Post.where(author: current_user.friends).or(Post.where(author: current_user)).order(created_at: :desc)
     @post = Post.new
   end
   
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     p @post
     if @post.save
       flash[:notice] = "Post is published."
-      redirect_to post_path(@post)
+      redirect_to @post
     else
       flash[:alert] = "Something went wrong."
       render :new
@@ -31,9 +31,20 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find(params[:id])
+
+    if @post.update(post_params)
+      flash[:notice] = "Post is updated."
+      redirect_to @post
+    else
+      render :edit
+    end
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to root_path
   end
 
   private

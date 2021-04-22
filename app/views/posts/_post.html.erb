@@ -31,12 +31,12 @@
         <p class="level-item">
           <%= link_to "Respond"%>
         </p>
-        <% if current_user == @post.author%>
+        <% if current_user == post.author%>
           <p class="level-item">
-            <%= link_to "Respond"%>
+            <%= link_to "Edit", edit_post_path(post)%>
           </p>
           <p class="level-item">
-            <%= link_to "Respond"%>
+            <%= link_to "Delete", post_path(post), method: :delete, data: {confirm: "Are you sure?"}%>
           </p>
         <% end %>
       </div>

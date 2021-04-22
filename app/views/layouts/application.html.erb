@@ -24,23 +24,13 @@
   <nav class="navbar is-info" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <%= link_to "notFaceBook", root_path, class: "navbar-item has-text-withe is-size-3" %>
-
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
   </div>
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item">
-        Home
-      </a>
-
-      <a class="navbar-item">
-        Documentation
-      </a>
+      <%= link_to "Home", root_path, class: "navbar-item" %>
+      <%= link_to "Find people", users_path, class:"navbar-item"%>
+      
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
@@ -69,6 +59,8 @@
       <div class="navbar-item">
         <div class="buttons">
           <% if user_signed_in? %>
+            <%= link_to "New post", new_post_path, class: "button is-info is-light is-inverted"%>
+            <%= link_to "Profile", user_path(current_user), class: "button is-info is-light is-inverted"%>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "button is-info is-inverted"%>
           <% else %>
             <%= link_to "Sign up", new_user_registration_path, class: "button is-info is-inverted"%>
