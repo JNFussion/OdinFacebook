@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @posts = Post.where(author: current_user.friends).or(Post.where(author: current_user)).order(created_at: :desc)
+    @posts = Post.includes(:author, :likes).where(author: current_user.friends).or(Post.where(author: current_user)).order(created_at: :desc)
     @post = Post.new
   end
   

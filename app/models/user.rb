@@ -27,6 +27,10 @@ class User < ApplicationRecord
 
   has_many :posts
 
+  # User-Likes association
+
+  has_many :likes
+
   def full_name
     first_name + " " + last_name
   end

@@ -18,27 +18,8 @@
     
     <nav id="btn_bar" class="level m-3 p-2">
       <div class="level-left">
-        <p class="level-item">
-          <span class="icon">
-            <i class="far fa-thumbs-up"></i>
-          </span>
-        </p>
-        <p class="level-item">
-          <span class="icon">
-            <i class="far fa-thumbs-down"></i>
-          </span>
-        </p>
-        <p class="level-item">
-          <%= link_to "Respond"%>
-        </p>
-        <% if current_user == post.author%>
-          <p class="level-item">
-            <%= link_to "Edit", edit_post_path(post)%>
-          </p>
-          <p class="level-item">
-            <%= link_to "Delete", post_path(post), method: :delete, data: {confirm: "Are you sure?"}%>
-          </p>
-        <% end %>
+          <% like = post.likes.find{ |p| p.user_id == current_user.id}%>
+          <%= render "likes/vote_buttons", like: like, post: post%>
       </div>
     </nav>
   </div>
