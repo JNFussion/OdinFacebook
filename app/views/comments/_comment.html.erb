@@ -1,0 +1,27 @@
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="https://bulma.io/images/placeholders/128x128.png">
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <div>
+        <strong><%= comment.author.full_name%> </strong><small><%= comment.author.username%></small>
+      </div>
+      <div>
+        <%= comment.body%>
+      </div>
+      <div>
+        <small><%= distance_of_time_in_words_to_now(comment.created_at)%> ago</small>
+        <% if comment.created_at != comment.updated_at%>
+          <small>· edited <%= distance_of_time_in_words_to_now(comment.updated_at)%> ago</small>
+        <% end %>
+        <%= link_to "Respond to", new_comment_comment_path(comment)%>
+      </div>
+    </div>
+    <% unless current_page?(new_comment_comment_path(comment))%>
+      <%= render comment.comments %>
+    <% end %>
+  </div>
+</article>

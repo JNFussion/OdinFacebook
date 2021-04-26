@@ -20,7 +20,16 @@
       <div class="level-left">
           <% like = post.likes.find{ |p| p.user_id == current_user.id}%>
           <%= render "likes/vote_buttons", like: like, post: post%>
+          <% unless current_page?(post_path(post))%>
+            <%= link_to "Respond to", post_path(post)%>
+          <% end %>
       </div>
     </nav>
   </div>
+  
+  <% if current_page?(post_path(post)) %>
+    <%= render "comments/form", commentable: @post %>
+    <%= render @post.comments%> 
+  <% end %>
 </section>
+
