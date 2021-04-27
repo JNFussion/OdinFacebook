@@ -29,7 +29,7 @@ class User < ApplicationRecord
 
   # User-Likes association
 
-  has_many :likes
+  has_many :votes, class_name: :Like, dependent: :destroy
 
   # User-Comment association
 

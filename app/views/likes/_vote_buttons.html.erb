@@ -1,31 +1,43 @@
-<% if like%>
-  <% if like.liked? %>
+<% if vote%>
+  <% if vote.liked? %>
     <p class="level-item">
-      <%= link_to post_like_path(post, like), method: :delete do %>
+      <%= link_to post_like_path(post, vote), method: :delete do %>
         <span class="icon is-size-4">
           <i class="fas fa-thumbs-up"></i>
+        </span>
+        <span>
+          <%= post.likes_count%>
         </span>
       <% end %>
     </p>
     <p class="level-item">
-      <%= link_to post_like_path(post,like), method: :put do%>
+      <%= link_to post_like_path(post,vote), method: :put do%>
         <span class="icon is-size-4 has-text-danger">
           <i id="dislike" class="far fa-thumbs-down"></i>
+        </span>
+        <span>
+          <%= post.dislikes_count%>
         </span>
       <% end %>
     </p>
   <% else %>
     <p class="level-item">
-      <%= link_to post_like_path(post, like), method: :put do %>
+      <%= link_to post_like_path(post, vote), method: :put do %>
         <span class="icon is-size-4">
           <i class="far fa-thumbs-up"></i>
+        </span>
+        <span>
+          <%= post.likes_count%>
         </span>
       <% end %>
     </p>
     <p class="level-item">
-      <%= link_to post_like_path(post, like), method: :delete do%>
+      <%= link_to post_like_path(post, vote), method: :delete do%>
         <span class="icon is-size-4 has-text-danger">
           <i id="dislike" class="fas fa-thumbs-down"></i>
+        </span>
+        <span>
+          <%= post.dislikes_count%>
         </span>
       <% end %>
     </p>
@@ -36,12 +48,18 @@
       <span class="icon is-size-4">
         <i class="far fa-thumbs-up"></i>
       </span>
+      <span>
+        <%= post.likes_count%>
+      </span>
     <% end %>
   </p>
   <p class="level-item">
     <%= link_to post_likes_path(post,user_id: current_user.id, vote: "disliked"), method: :post do%>
       <span class="icon is-size-4 has-text-danger">
         <i id="dislike" class="far fa-thumbs-down"></i>
+      </span>
+      <span>
+        <%= post.dislikes_count%>
       </span>
     <% end %>
   </p>

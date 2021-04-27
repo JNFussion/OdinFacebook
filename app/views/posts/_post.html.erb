@@ -18,8 +18,8 @@
     
     <nav id="btn_bar" class="level m-3 p-2">
       <div class="level-left">
-          <% like = post.likes.find{ |p| p.user_id == current_user.id}%>
-          <%= render "likes/vote_buttons", like: like, post: post%>
+          <% vote = @votes.find{ |p| p.post_id == post.id}%>
+          <%= render "likes/vote_buttons", vote: vote, post: post%>
           <% unless current_page?(post_path(post))%>
             <%= link_to "Respond to", post_path(post)%>
           <% end %>
