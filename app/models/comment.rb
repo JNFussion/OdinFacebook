@@ -3,4 +3,12 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
   has_many :comments, as: :commentable
   
+
+  def find_post
+    parent_comment = commentable
+    while !parent_comment.is_a?(Post)
+      parent_comment = parent_comment.commentable
+    end
+    parent_comment
+  end
 end

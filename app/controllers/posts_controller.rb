@@ -2,12 +2,12 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @posts = Post.includes(:author, :likes).where(author: current_user.friends).or(Post.where(author: current_user)).order(created_at: :desc)
+    @posts = Post.includes(:author,:likes).where(author: current_user.friends).or(Post.where(author: current_user)).order(created_at: :desc)
     @post = Post.new
   end
   
   def show
-    @post = Post.find(params[:id])
+    @post = Post.includes(:author, comments: { comments: [:comments, :author]}).find(params[:id])
     @comment = Comment.new
   end
 
@@ -21,7 +21,6 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    p @post
     if @post.save
       flash[:notice] = "Post is published."
       redirect_to @post
