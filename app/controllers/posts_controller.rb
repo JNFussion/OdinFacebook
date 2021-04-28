@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.includes(:author, comments: { comments: [:comments, :author]}).find(params[:id])
+    @votes = Like.where(user: current_user, post: @post)
     @comment = Comment.new
   end
 
