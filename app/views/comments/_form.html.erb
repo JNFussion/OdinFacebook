@@ -1,10 +1,11 @@
 <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">
-      <img src="https://bulma.io/images/placeholders/128x128.png">
+      <%= image_tag user_avatar(current_user)%>
     </p>
   </figure>
   <div class="media-content">
+    Comment as <%= link_to current_user.username, user_path(current_user)%>
     <%= form_for [commentable, @comment] do |f|%>
     <div class="field">
       <p class="control">

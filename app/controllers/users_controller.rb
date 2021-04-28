@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   def index
-    @users = User.where.not(id: current_user).includes(:friend_requests_as_requestor).order(:id)
+    @users = User.where.not(id: current_user).includes(:friend_requests_as_requestor).order(:id).with_attached_avatar
   end
 
   def show
