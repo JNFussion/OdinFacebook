@@ -12,10 +12,9 @@ class Like < ApplicationRecord
   after_destroy :update_votes_counter
 
   def update_votes_counter
-    if liked?
-      post.likes_count = post.likes.count
-    else
-      post.dislikes_count = post.dislikes_count.count
-    end
+    post.likes_count = post.likes.count
+    post.dislikes_count = post.dislikes.count
+
+    post.save
   end
 end

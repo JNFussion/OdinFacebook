@@ -1,0 +1,41 @@
+<div class="container box p-0">
+  <article class="media p-2">
+    <figure class="media-left">
+      <p class="image is-128x128">
+        <%= image_tag user_avatar(user)%>
+      </p>
+    </figure>
+    <div class="media-content is-align-self-center">
+      <div class="content">
+        <h2 class="title my-0"><%= user.full_name%></h2><small><%=user.username%></small>
+        <br>
+        <p>
+          <strong>Birthdate:</strong> <%=user.birth_date%>
+          <br>
+          <strong>Country:</strong> <%= user.nationality_name%>
+        </p>
+      </div>
+    </div>
+    <% if user == current_user%>
+      <div class="media-right">
+        <%= link_to edit_user_registration_path(user) do%>
+          <figure class="icon">
+            <i class="fas fa-edit"></i>
+          </figure>
+        <% end %>
+      </div>
+    <% end %>
+  </article>
+  <section class="section p-2 m-1">
+    <div class="container">
+      <div class="content">
+        <h2 class="title is-4 mb-3">Contacts: </h2>
+        <ul>
+          <li><strong>Phone number:</strong> <%=current_user.friends.include?(user) || current_user == user ? user.phone_number : "This info is private."%></li>
+          <li><strong>Email:</strong> <%= current_user.friends.include?(user) || current_user == user ? user.email : "This info is private."%></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+

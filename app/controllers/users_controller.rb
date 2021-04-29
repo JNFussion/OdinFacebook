@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(posts: {author: {avatar_attachment: :blob}}, friends: {avatar_attachment: :blob}, avatar_attachment: :blob).order("posts.created_at DESC").find(params[:id])
+    @votes = Like.where(user: current_user, posts: @user.posts)
   end
 
   def current_user

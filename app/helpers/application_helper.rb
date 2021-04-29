@@ -1,10 +1,10 @@
 module ApplicationHelper
 
-  def user_avatar(user)
+  def user_avatar(user,size=256)
     if user.avatar.attached?
-      user.avatar
+      user.avatar.variant(resize: "#{size}x#{size}")
     else
-      user.gravatar_url
+      user.gravatar_url(size: size)
     end
   end
 end

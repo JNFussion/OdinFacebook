@@ -1,1 +1,27 @@
-<%= render @user%>
+<div class="columns">
+  <div class="column is-3">
+  <div class="columns">
+    <div class="column is-11 container mt-2">
+       <%= render "user_profile", :user => @user %>
+    </div>
+  </div>
+    
+  </div>
+  
+  <div class="column is-6">
+    <div class="container">
+      <%= render @user.posts %>
+    </div>
+  </div>
+  
+  <div class="column is-3">
+    <article id="notification_user" class="message is-info box mt-6 mx-3">
+      <div class="message-header">
+        <p>Friends:</p>
+      </div>
+      <div class="message-body">
+        <%= render @user.friends%>
+      </div>
+    </article>
+  </div>
+</div>
