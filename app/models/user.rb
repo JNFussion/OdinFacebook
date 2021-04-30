@@ -8,7 +8,9 @@ class User < ApplicationRecord
   gravtastic
   
   validates :password, confirmation: true
-  validates :email, :username, :password, :password_confirmation, :first_name, :last_name, :birth_date, :nationality, presence: true
+  validates :email, :username, :first_name, :last_name, :birth_date, :nationality, presence: true
+  validates :password, :password_confirmation, presence: true, on: :create
+  validates :password, :password_confirmation, presence: false, on: :update
   validates :email, :username, uniqueness: true
   validates :first_name, :last_name, format: {with: /\A[a-zA-Z]+\z/,  message: "only allows letters"}
   validates_date :birth_date, between: [Date.today - 14.years, Date.today - 100.years]

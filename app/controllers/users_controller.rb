@@ -9,10 +9,31 @@ class UsersController < ApplicationController
     @votes = Like.where(user: current_user, posts: @user.posts)
   end
 
+  def edit
+    @user = current_user
+    render :edit_password
+  end
+
+  def update_password
+    @user = current_user
+    if @user.update_with_password(user_params)
+      flash[:notice] = "Password has been changed"
+      bypass_sign_in(@user)
+      redirect_to root_path
+    else
+      render :edit_password
+    end
+  end
+
+
   def current_user
     @current_user ||= super.tap do |user|
       ::ActiveRecord::Associations::Preloader.new.preload(user, :friends)
       ::ActiveRecord::Associations::Preloader.new.preload(user, :receivers)
     end
   end  
+
+  def user_params
+    params.require(:user).permit(:password, :password_confirmation, :current_password)
+  end
 end

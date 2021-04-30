@@ -1,43 +1,115 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div id="form-div" class="column is-one-third has-background-info">
+        <h2 id="form-title" class="title has-text-white has-background-info-dark p-2">
+          Edit <%= resource_name.to_s.humanize %>
+        </h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          
+          <div>
+           <%= render "devise/shared/error_messages", resource: resource %>
+          </div>
+         
+          <div class="field">
+            <%= f.label :email, class:"label has-text-white" %>
+            <div class="control has-icons-left">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"input"%>
+              <span class="icon is-small is-left">
+                <i class="fas fa-at"></i>
+              </span>
+            </div>
+            <p class="help">
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+              <% end %>
+            </p>
+          </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <div class="field">
+            <%= f.label :username, class: "label has-text-white"%>
+            <div class="control has-icons-left">
+              <%= f.text_field :username, class: "input"%>
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :first_name, class: "label has-text-white"%>
+            <div class="control">
+              <%= f.text_field :first_name, placeholder: "John" ,class: "input"%>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :last_name, class: "label has-text-white"%>
+            <div class="control">
+              <%= f.text_field :last_name, placeholder: "Doe", class: "input"%>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :phone_number, class: "label has-text-white"%>
+            <div class="control has-icons-left">
+              <%= f.text_field :phone_number, class: "input", placeholder: "+1 206 555 0100"%>
+              <span class="icon is-small is-left">
+                <i class="fas fa-phone"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :birth_date, class: "label has-text-white"%>
+            <div class="control has-text-weight-bold has-text-white is-flex is-align-items-cente">
+              <div class="select mr-2 is-small">
+                <%= f.date_select :birth_date, start_year: Date.today.year - 14, end_year: Date.today.year - 100, date_separator: '</div>-<div class="select mx-2 is-small">' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :nationality, class: "label has-text-white"%>
+            <p class="control has-icons-left">
+              <span class="select is-small">
+                <%= f.country_select :nationality%>
+              </span>
+              <span class="icon is-small is-left">
+                <i class="fas fa-globe"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="field">
+            <%= f.label :current_password, class:"label has-text-white"%>
+            <div class="control">
+              <%= f.password_field :current_password, autocomplete: "current-password", class:"input" %>
+            </div>
+            <p class="help has-text-white">
+             <i>(we need your current password to confirm your changes)</i>
+            </p>
+          </div>
+          
+          <div class="field is-grouped is-grouped-right">
+            <div class="control">
+              <%= link_to "Change password", edit_user_path, class:"button is-info is-inverted"%>
+            </div>
+            <div class="control">
+              <%= f.submit "Update", class:"button is-info is-inverted" %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="block has-text-white">
+        <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"button is-danger" %></p>
+        </div>
+        
+        <div class="field is-grouped is-grouped-right">
+          <%= link_to "Back", :back, class: "button is-info is-inverted" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</section>

@@ -12,4 +12,9 @@ Rails.application.routes.draw do
   resources :comments do
     resources :comments, except: [:index, :show]
   end
+  resource :user, only: [:edit] do
+    collection do
+      patch 'update_password'
+    end
+  end
 end
