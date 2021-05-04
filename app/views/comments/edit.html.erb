@@ -1,0 +1,28 @@
+<section class="hero is-halfheight">
+  <div class="hero-body">
+    <div class="container is-max-desktop box has-background-info-light">
+     <article class="media">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <%= image_tag user_avatar(current_user)%>
+          </p>
+        </figure>
+        <div class="media-content">
+          Comment as <%= link_to current_user.username, user_path(current_user)%>
+          <%= form_for @comment do |f|%>
+          <div class="field">
+            <p class="control">
+              <%= f.text_area :body, class:"textarea is-info is-small", rows: "3", autofocus: true%>
+            </p>
+          </div>
+          <nav class="level">
+            <div class="level-right">
+              <%= f.submit "Comment", class: "button is-info level-item"%>
+            </div>
+            <% end %>
+          </nav>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

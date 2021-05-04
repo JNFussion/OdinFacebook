@@ -15,6 +15,27 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+    @comment = Comment.find(params[:id])
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
+    if params[:removed]
+      if @comment.update(body: "REMOVED")
+        redirect_to(post_path(@comment.find_post), notice: 'Your comment was successfully update!')
+      else
+        render :edit
+      end
+    else
+      if @comment.update(comment_params)
+        redirect_to(post_path(@comment.find_post), notice: 'Your comment was successfully update!')
+      else
+        render :edit
+      end
+    end
+  end
+
   private
 
   def comment_params

@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates :email, :username, uniqueness: true
   validates :first_name, :last_name, format: {with: /\A[a-zA-Z]+\z/,  message: "only allows letters"}
   
-
+  before_destroy :remove_friends, :update_comments
 
   # User-Friend Request association
   has_many :friend_requests_as_requestor, class_name: :FriendRequest, foreign_key: :requestor_id
@@ -25,7 +25,7 @@ class User < ApplicationRecord
 
   # User-Friend association
   has_many :friendships
-  has_many :friends, through: :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
 
   # User-Posts association
 
@@ -37,7 +37,7 @@ class User < ApplicationRecord
 
   # User-Comment association
 
-  has_many :comments, dependent: :destroy
+  has_many :comments
 
   # Profile pic. Active storage
 
@@ -68,4 +68,15 @@ class User < ApplicationRecord
       end
     end
   end
+
+  private
+
+  def update_comments
+    comments.update_all(body: "REMOVED")
+  end
+
+  def remove_friends
+    Friendship.where(user: self).or(Friendship.where(friend: self)).destroy_all
+  end
+
 end

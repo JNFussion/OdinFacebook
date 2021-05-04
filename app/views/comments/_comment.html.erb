@@ -1,13 +1,24 @@
 <article class="media">
   <figure class="media-left">
-    <p class="image is-64x64">
-      <%= image_tag user_avatar(comment.author)%>
-    </p>
+    <% if  comment.body.eql?("REMOVED")%>
+      <span id="removed" class="icon">
+        <i class="fas fa-user-circle fas fa-4x"></i>
+      </span> 
+    <% else %>
+      <p class="image is-64x64">
+        <%= image_tag user_avatar(comment.author)%>
+      </p>
+    <% end %>
   </figure>
   <div class="media-content">
     <div class="content">
       <div>
-        <strong><%=link_to comment.author.full_name, user_path(comment.author), id: "user_link"%> </strong><small><%= comment.author.username%></small>
+        <% if  comment.body.eql?("REMOVED")%>
+           <strong>[REMOVED]</strong><small>[REMOVED]</small>
+        <% else %>
+          <strong><%=link_to comment.author.full_name, user_path(comment.author), id: "user_link"%> </strong><small><%= comment.author.username%></small>
+        <% end %>
+        
       </div>
       <div>
         <%= comment.body%>
@@ -16,6 +27,12 @@
         <small><%= distance_of_time_in_words_to_now(comment.created_at)%> ago</small>
         <% if comment.created_at != comment.updated_at%>
           <small>· edited <%= distance_of_time_in_words_to_now(comment.updated_at)%> ago</small>
+        <% end %>
+        <% if comment.author == current_user%>
+          <% unless comment.body.eql?("REMOVED") %>
+            <%= link_to "Edit", edit_comment_path(comment), class:"mr-2"%>
+            <%= link_to "Delete", comment_path(comment, removed: true),method: :put, data: { confirm: "Are you sure?" }, class:"mr-2"%>
+          <% end %>
         <% end %>
         <%= link_to "Respond to", new_comment_comment_path(comment)%>
       </div>
