@@ -9,6 +9,27 @@ class UsersController < ApplicationController
     @votes = Like.where(user: current_user, posts: @user.posts)
   end
 
+  def edit_avatar
+    @user = current_user
+    render :edit_avatar
+  end
+
+  def update_avatar
+    @user = current_user
+    if @user.update_without_password(user_params)
+      flash[:notice] = "Avatar pictue has been uploaded"
+      bypass_sign_in(@user)
+      redirect_to root_path
+    else
+      render :edit_avatar
+    end
+  end
+
+  def destroy_avatar
+    current_user.avatar.purge
+    redirect_to root_path
+  end
+
   def edit
     @user = current_user
     render :edit_password
@@ -34,6 +55,6 @@ class UsersController < ApplicationController
   end  
 
   def user_params
-    params.require(:user).permit(:password, :password_confirmation, :current_password)
+    params.require(:user).permit(:password, :password_confirmation, :current_password, :avatar)
   end
 end

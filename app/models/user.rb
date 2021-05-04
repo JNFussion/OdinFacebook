@@ -18,14 +18,14 @@ class User < ApplicationRecord
 
   # User-Friend Request association
   has_many :friend_requests_as_requestor, class_name: :FriendRequest, foreign_key: :requestor_id
-  has_many :receivers, through: :friend_requests_as_requestor
+  has_many :receivers, through: :friend_requests_as_requestor, dependent: :destroy
   has_many :friend_requests_as_receiver, class_name: :FriendRequest, foreign_key: :receiver_id
-  has_many :requestors, through: :friend_requests_as_receiver
+  has_many :requestors, through: :friend_requests_as_receiver, dependent: :destroy
 
 
   # User-Friend association
   has_many :friendships
-  has_many :friends, through: :friendships
+  has_many :friends, through: :friendships, dependent: :destroy
 
   # User-Posts association
 

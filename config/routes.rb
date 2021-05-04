@@ -12,9 +12,12 @@ Rails.application.routes.draw do
   resources :comments do
     resources :comments, except: [:index, :show]
   end
+  get 'user/edit_avatar', to: 'users#edit_avatar'
+  delete 'user/destroy_avatar', to: 'users#destroy_avatar'
   resource :user, only: [:edit] do
     collection do
       patch 'update_password'
+      patch 'update_avatar'
     end
   end
 end
