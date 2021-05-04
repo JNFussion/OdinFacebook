@@ -105,6 +105,13 @@
           </div>
         
           <div class="buttons is-right mt-5">
+            <%= link_to user_facebook_omniauth_authorize_path, method: :post, class:"button is-small" do%>
+              <span class="icon has-text-info">
+                <i class="fab fa-facebook-square"></i>
+              </span>
+              <span>Facebook</span>
+            <% end %>
+            
             <%= render "devise/shared/links" %>
             <%= f.submit "Sign up", class: "button is-info is-inverted" %>
             <%= link_to 'Back', :back , class: "button is-info is-inverted"%>

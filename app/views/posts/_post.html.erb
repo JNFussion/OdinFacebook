@@ -8,7 +8,7 @@
       </figure>
       <div class="media-content is-align-self-center">
         <div class="content has-text-white">
-          <strong class="is-size-5 has-text-white"><%= post.author.full_name%></strong> <small><%= distance_of_time_in_words_to_now(post.created_at)%> ago.</small>
+          <strong class="is-size-5 has-text-white"><%= link_to post.author.full_name, user_path(post.author), id: "user_link"%></strong> <small><%= distance_of_time_in_words_to_now(post.created_at)%> ago.</small>
         </div>
       </div>
     </article>
@@ -21,7 +21,7 @@
           <% vote = @votes.nil? ? @votes : @votes.find{ |p| p.post_id == post.id} %>
           <%= render "likes/vote_buttons", vote: vote, post: post%>
           <% unless current_page?(post_path(post))%>
-            <%= link_to "Respond to", post_path(post)%>
+            <%= link_to "See more", post_path(post)%>
           <% end %>
       </div>
     </nav>
