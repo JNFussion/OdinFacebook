@@ -25,9 +25,17 @@
             </div>
           <% end %>
           <div class="field">
-            <%= render "devise/shared/links" %>
+            <%= link_to user_facebook_omniauth_authorize_path, method: :post, class:"button" do%>
+              <span class="icon has-text-info">
+                <i class="fab fa-facebook-square"></i>
+              </span>
+              <span>Facebook</span>
+            <% end %>
           </div>
-          
+
+          <div class="field">
+            <%= render "devise/shared/links"%>
+          </div>
           
           <div class="buttons is-right is-info is-inverted">
             <%= f.submit "Log in", class: "button is-info is-inverted" %>
