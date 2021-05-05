@@ -9,6 +9,22 @@ class UsersController < ApplicationController
     @votes = Like.where(user: current_user, posts: @user.posts)
   end
 
+  def edit_email
+    @user = current_user
+    render :edit_email
+  end
+
+  def update_email
+    @user = current_user
+    if @user.update_with_password(user_params)
+      flash[:notice] = "Email has been uploaded"
+      bypass_sign_in(@user)
+      redirect_to root_path
+    else
+      render :edit_email
+    end
+  end
+
   def edit_avatar
     @user = current_user
     render :edit_avatar
@@ -54,7 +70,9 @@ class UsersController < ApplicationController
     end
   end  
 
+  private
+
   def user_params
-    params.require(:user).permit(:password, :password_confirmation, :current_password, :avatar)
+    params.require(:user).permit(:password, :password_confirmation, :current_password, :avatar, :email)
   end
 end

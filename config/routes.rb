@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'posts#index'
   
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' }
   resources :users, only: [:index, :show]
   resources :friend_requests, only: [:create, :update, :destroy]
   resources :friendships, only: [:destroy]
@@ -13,11 +13,13 @@ Rails.application.routes.draw do
     resources :comments, except: [:index, :show]
   end
   get 'user/edit_avatar', to: 'users#edit_avatar'
+  get 'user/edit_email', to: 'users#edit_email'
   delete 'user/destroy_avatar', to: 'users#destroy_avatar'
   resource :user, only: [:edit] do
     collection do
       patch 'update_password'
       patch 'update_avatar'
+      patch 'update_email'
     end
   end
 end
