@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to OdinFacebook, <%= @user.first_name %>.</h1>
+    <p>
+      You have successfully signed up to OdinFacebook. This site is a project for educational purposes.<br>
+    </p>
+    <p>
+      To login to the site, just click <%= link_to "here", new_user_session_url %>.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

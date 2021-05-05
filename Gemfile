@@ -56,6 +56,7 @@ group :development do
   gem 'spring'
   gem 'guard'
   gem 'guard-minitest'
+  gem "letter_opener"
 end
 
 group :test do

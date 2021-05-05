@@ -14,6 +14,7 @@ class User < ApplicationRecord
   validates :email, :username, uniqueness: true
   validates :first_name, :last_name, format: {with: /\A[a-zA-Z]+\z/,  message: "only allows letters"}
   
+  after_create :send_welcome_email
   before_destroy :remove_friends, :update_comments
 
   # User-Friend Request association
@@ -70,6 +71,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_now
+  end
 
   def update_comments
     comments.update_all(body: "REMOVED")
