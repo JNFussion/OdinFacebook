@@ -75,7 +75,7 @@ Rails.application.configure do
     enable_starttls_auto: true,
     open_timeout:         5,
     read_timeout:         5 }
-  config.action_mailer.default_options = {from: ENV['GMAIL_USER'], host: 'odin-notfacebook.herokuapp.com'}
+    config.action_mailer.default_url_options = { host: 'odin-notfacebook.herokuapp.com', protocol: 'https' }
 
 
   # Ignore bad email addresses and do not raise email delivery errors.
