@@ -18,4 +18,4 @@ A user have some basic info such as first name, last name, birthday, etc. And, t
 
 - I have uses Active Storage to upload images and [Cloudinary](https://cloudinary.com) as a cloud storage service.
 
-- I have set up a mailer to send a welcome email when a new user signs up. I have use [Sendgrid add-on](https://devcenter.heroku.com/articles/sendgrid). 
+- I have set up a mailer to send a welcome email when a new user signs up. Doesn't work in production.
