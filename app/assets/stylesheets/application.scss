@@ -60,12 +60,6 @@ a.has-text-white:hover, a.has-text-white:focus {
     font-size: 0.70em;
   }
 }
-.image {
-  border-radius: 50%;
-  img {
-    border-radius: 50%;
-  }
-}
 #btn_bar{
   border-top: thin solid $info;
 }
@@ -77,4 +71,10 @@ a.has-text-white:hover, a.has-text-white:focus {
 #removed{
   height: 4rem;
   width: 4rem;
+}
+#post_content{
+  border-bottom: thin solid $info;
+  img{
+    border: 1px solid $info-light;
+  }
 }

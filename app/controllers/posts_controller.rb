@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @posts = Post.includes(author: {avatar_attachment: :blob} ).where(author: current_user.friends).or(Post.where(author: current_user)).order(created_at: :desc)
+    @posts = Post.includes(author: {avatar_attachment: :blob}, photo_attachment: :blob ).where(author: current_user.friends).or(Post.where(author: current_user)).order(created_at: :desc)
     @votes = Like.where(user: current_user, post: @posts)
     @post = Post.new
   end
@@ -52,6 +52,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :content)
+    params.require(:post).permit(:user_id, :content, :url_photo, :photo)
   end
 end

@@ -3,7 +3,7 @@
     <article class="media box mb-3 is-flex has-background-info">
       <figure class="media-left">
         <p class="image is-48x48">
-          <%= image_tag user_avatar(post.author) %>
+          <%= image_tag user_avatar(post.author), class:"is-rounded"%>
         </p>
       </figure>
       <div class="media-content is-align-self-center">
@@ -12,10 +12,18 @@
         </div>
       </div>
     </article>
-    <div class="container mx-3">
+    
+    <div id="post_content" class="container mx-3 pb-2">
       <%=post.content%>
     </div>
     
+    <% if post.url_photo? || post.photo.attached?%>
+      <div class="container m-4">
+        <figure class="image is-4by3">
+          <%= image_tag post_photo(post) %>
+        </figure>
+      </div>
+    <% end %>
     <nav id="btn_bar" class="level m-3 p-2">
       <div class="level-left">
           <% vote = @votes.nil? ? @votes : @votes.find{ |p| p.post_id == post.id} %>

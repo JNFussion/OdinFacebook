@@ -10,7 +10,11 @@
   
   <div class="column is-6">
     <div class="container">
-      <%= render @user.posts %>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <%= render @user.posts %>
+        </div>
+      </div>
     </div>
   </div>
   

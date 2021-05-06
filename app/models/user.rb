@@ -13,8 +13,11 @@ class User < ApplicationRecord
   validates :password, :password_confirmation, presence: false, on: :update
   validates :email, :username, uniqueness: true
   validates :first_name, :last_name, format: {with: /\A[a-zA-Z]+\z/,  message: "only allows letters"}
+  validates :avatar,
+            content_type: [:png, :jpg, :jpeg],
+            size: { less_than: 2.megabytes , message: 'must be less than 2MB in size' }
   
-  after_create :send_welcome_email
+            after_create :send_welcome_email
   before_destroy :remove_friends, :update_comments
 
   # User-Friend Request association
