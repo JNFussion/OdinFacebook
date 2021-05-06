@@ -1,7 +1,7 @@
 # README
 ## OdinFacebook
 This is the final proyect from [The odin Proyect course of Ruby on Rails](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby-on-rails/lessons/final-project). It's a simplified version of Facebook. The project has a list of assignment that I have to implement on my own.<br/><br/>
-The project is deployed on [Heroku](https://www.heroku.com/home) ~~> OdinFacebook [here]().
+The project is deployed on [Heroku](https://www.heroku.com/home) ~~> OdinFacebook [here](https://odin-notfacebook.herokuapp.com).
 
 ### Features:
 
