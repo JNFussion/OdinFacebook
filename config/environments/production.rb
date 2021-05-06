@@ -63,6 +63,20 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "odin_facebook_production"
 
   config.action_mailer.perform_caching = false
+  onfig.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  onfig.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    user_name:            ENV['GMAIL_USER'],
+    password:             ENV['GMAIL_PASS'],
+    authentication:       'plain',
+    enable_starttls_auto: true,
+    open_timeout:         5,
+    read_timeout:         5 }
+  config.action_mailer.default_options = {from: ENV['GMAIL_USER']}
+
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
