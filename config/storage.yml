@@ -32,3 +32,10 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+cloudinary:      
+  service: Cloudinary
+  cloud_name: dzeaghuam
+  api_key: <%= ENV['CLOUDINARY_API_KEY']%>
+  api_secret: <%= ENV['CLOUDINARY_API_SECRET']%>
+  secure: true
+  cdn_subdomain: true
